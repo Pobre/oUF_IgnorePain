@@ -1,0 +1,10 @@
+## Interface: 70300
+## Author: GrumpyShaman
+## Version: @project-version@
+## Title: oUF_IgnorePain
+## Notes: Ignore Pain bar support for oUF Layouts.
+## Dependencies: oUF
+
+Tags.lua
+IgnorePain.lua
+
