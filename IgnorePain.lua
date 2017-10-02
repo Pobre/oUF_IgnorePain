@@ -11,6 +11,7 @@ assert(oUF, "oUF IgnorePain was unable to locate oUF install")
 
 if(select(2,UnitClass("player") ~= "WARRIOR")) then return end
 
+-- Functions
 local function GetIgnorePainMax()
 	--[[
 	-- Colect all data necessary to calculate Ignore Pain correctly.
@@ -32,9 +33,34 @@ local function GetIgnorePainMax()
 
 	-- Ignore Pain max pool.
 	if(not select(4, GetTalentInfo(5, 2, 1))) then
-		return ((atkBase + atkPos + atkNeg) * 22.3 * (versa + 1) * scales * idomitable) * 0.9 * 3
+		return ((atkBase + atkPos + atkNeg) * 22.3 * (versa + 1) * scales * indomitable) * 0.9 * 3
 	else
-		return ((atkBase + atkPos + atkNeg) * 22.3 * (versa + 1) * scales * idomitable) * 0.9 * 3 * 2
+		return ((atkBase + atkPos + atkNeg) * 22.3 * (versa + 1) * scales * indomitable) * 0.9 * 3 * 2
+	end
+end
+
+-- ShortNumber
+local function ShortNumber(value)
+	if(value >= 1e6) then
+		return gsub(format('%.2fm', value / 1e6), '%.?0+([km])$', '%1')
+	elseif(value >= 1e4) then
+		return gsub(format('%.1fk', value / 1e3), '%.?0+([km])$', '%1')
+	else
+		return value
+	end
+end
+
+-- Tags
+for tag, func in next, {
+	["ignorepain:cur"] = function(unit)
+		return ShortNumber(select(17, UnitBuff(unit, GetSpellInfo(190456))) or 0)
+	end,
+	["ignorepain:max"] = function()
+		return ShortNumber(GetIgnorePainMax())
+	end,
+} do
+	oUF.Tags.Methods[tag] = func
+	oUF.Tags.Events[tag] = "UNIT_ABSORB_AMOUNT_CHANGED"
 end
 
 -- Index of Protection Warrior

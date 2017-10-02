@@ -5,6 +5,5 @@
 ## Notes: Ignore Pain bar support for oUF Layouts.
 ## Dependencies: oUF
 
-Tags.lua
 IgnorePain.lua
 
