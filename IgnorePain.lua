@@ -156,8 +156,6 @@ local function Enable(self)
 			element:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 		end
 
-		element.GetIgnorePainMax = GetIgnorePainMax
-
 		return true
 	end
 end

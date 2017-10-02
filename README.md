@@ -1,5 +1,4 @@
 # oUF IgnorePain
-----
 
 ## Description
 
